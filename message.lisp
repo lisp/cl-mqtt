@@ -18,7 +18,7 @@
 ;;; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 ;;; THE SOFTWARE.
 
-(in-package :cl-mqtt)
+(in-package :mqtt-implementation)
 
 (defstruct (mqtt-message
             (:constructor %make-mqtt-message

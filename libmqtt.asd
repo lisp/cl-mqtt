@@ -1,4 +1,5 @@
 ;;; Copyright (c) 2015 Ivan Shvedunov
+;;; Copyright (c) 2017 james anderson <james@dydra.com>
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a copy
 ;;; of this software and associated documentation files (the "Software"), to deal
@@ -18,23 +19,17 @@
 ;;; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 ;;; THE SOFTWARE.
 
-(asdf:defsystem :cl-mqtt
+(asdf:defsystem :libmqtt
   :serial t
-  :description "Common Lisp MQTT implementation for cl-async"
-  :author "Ivan Shvedunov <ivan4th@gmail.com>"
+  :description "Common Lisp MQTT line protocol support"
+  :author "james anderson <james@dydra.com>, Ivan Shvedunov <ivan4th@gmail.com>"
   :license "TBD"
   :depends-on (:alexandria
                :iterate
-               :babel
-               :i4-diet-utils
-               :cl-async
-               :blackbird
-               ;; FIXME: rm printv
-               :printv)
+               :babel)
   :components ((:file "package")
                (:file "specials")
                (:file "conditions")
                (:file "binary")
                (:file "frame")
-               (:file "message")
-               (:file "client")))
+               (:file "message")))

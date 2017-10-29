@@ -158,7 +158,8 @@
                                (when delay
                                  (as:remove-event delay)
                                  (as:free-event delay)
-                                 (setf (write-callback client) nil)
+                                 (setf (write-callback client) nil
+                                       (write-finished-promise client) nil)
                                  #++
                                  (dbg "sent ~s: ~s" (mqtt-message-type message) message)
                                  (resolve))))
@@ -169,13 +170,11 @@
                                    (write-finished-promise client) nil)
                              (%disconnect client)
                              (let ((condition (make-condition 'mqtt-error
-                                                              :format-control "Timed out writing message: ~s"
-                                                              :format-arguments (list message))))
+                                                              :format-control "Timed out writing")))
                                (handle-connection-error client condition)
                                (reject condition))))
                      (%send-message client message)))))
-          (if (or (null (write-finished-promise client))
-                  (bb:promise-finished-p (write-finished-promise client)))
+          (if (null (write-finished-promise client))
               (actually-send)
               (bb:attach (write-finished-promise client) #'actually-send)))))
 

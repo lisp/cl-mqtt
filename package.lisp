@@ -1,4 +1,5 @@
 ;;; Copyright (c) 2015 Ivan Shvedunov
+;;; Copyright (c) 2017 james anderson <james@dydra.com>
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a copy
 ;;; of this software and associated documentation files (the "Software"), to deal
@@ -18,19 +19,20 @@
 ;;; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 ;;; THE SOFTWARE.
 
-(defpackage :cl-mqtt
-  (:use :cl :alexandria :iterate :i4-diet-utils)
-  (:nicknames :mqtt)
-  (:export #:mqtt-message-mid
-           #:mqtt-message-topic
-           #:mqtt-message-payload
-           #:mqtt-message-qos
-           #:mqtt-message-retain
-           #:mqtt-message-topic
-           #:mqtt-message-payload
+(defpackage :mqtt
+  (:export #:message-mid
+           #:message-topic
+           #:message-payload
+           #:message-qos
+           #:message-retain
+           #:message-topic
+           #:message-payload
            #:connect
            #:publish
            #:subscribe
            #:unsubscribe
            #:ping
            #:disconnect))
+
+(defpackage :mqtt-implementation
+  (:use :cl :alexandria :iterate :mqtt))
