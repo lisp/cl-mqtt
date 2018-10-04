@@ -32,13 +32,12 @@
     #'(lambda (bytes)
         (assert (> (length bytes) 0))
         (let ((pos 0))
-          (iter (while (< pos (length bytes)))
-                #++
-                (dbg "in: ~s ~s ~s" state pos len)
+          (loop :while (< pos (length bytes))
+		:do #++ (dbg "in: ~s ~s ~s" state pos len)
                 (setf state
                       (flet ((finished ()
-                               (funcall callback buf var-header-start)
-                               (setf var-header-start 0 len 1)
+			       (funcall callback buf var-header-start)
+			       (setf var-header-start 0 len 1)
                                :start))
                         (ecase state
                           (:start
@@ -80,7 +79,8 @@
         (values buf len))))
 
 (defun store-packet-length (buf len)
-  (iter (let ((b (ldb (byte 7 0) len)))
-          (setf len (ash len -7))
-          (vector-push-extend (if (zerop len) b (logior #x80 b)) buf))
-        (while (plusp len))))
+  (loop :for b = (ldb (byte 7 0) len)
+	:do (progn
+	     (setf len (ash len -7))
+	     (vector-push-extend (if (zerop len) b (logior #x80 b)) buf))
+	:while (plusp len)))

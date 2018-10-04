@@ -19,7 +19,9 @@
 ;;; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 ;;; THE SOFTWARE.
 
-(defpackage :mqtt
+(in-package :common-lisp-user)
+
+(defpackage :mqtt (:use )
   (:export #:message-mid
            #:message-topic
            #:message-payload
@@ -35,4 +37,6 @@
            #:disconnect))
 
 (defpackage :mqtt-implementation
-  (:use :cl :alexandria :iterate :mqtt))
+  (:use :cl :alexandria
+	;; :iterate
+	:mqtt))

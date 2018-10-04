@@ -22,3 +22,6 @@
 (in-package :mqtt-implementation)
 
 (define-condition mqtt-error (simple-error) ())
+
+(defun mqtt-error (string &rest args)
+  (error 'mqtt-error :format-control string :format-arguments args))

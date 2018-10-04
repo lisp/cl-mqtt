@@ -25,7 +25,7 @@
   :author "james anderson <james@dydra.com>, Ivan Shvedunov <ivan4th@gmail.com>"
   :license "TBD"
   :depends-on (:alexandria
-               :iterate
+               ;;:iterate
                :babel)
   :components ((:file "package")
                (:file "specials")
